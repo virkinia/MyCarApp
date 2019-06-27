@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-public class MainActivity extends AppCompatActivity  implements MakerFragment.OnMakerInteractionListener, ColorFragment.OnSpinnerInteractionListener {
+public class MainActivity extends AppCompatActivity  implements MakerFragment.OnMakerInteractionListener, ColorFragment.OnSpinnerInteractionListener, DescriptionFragment.OnDescriptionInteractionListener {
 
     FragmentManager FM;
     FragmentTransaction FT;
@@ -53,6 +53,16 @@ public class MainActivity extends AppCompatActivity  implements MakerFragment.On
         appPreferences.saveCar(car);
         setFragment(new DescriptionFragment());
 
+
+    }
+
+    @Override
+    public void setDescription(String value) {
+
+        CarModel car = appPreferences.readCar(null);
+        car.setDescription(value);
+        appPreferences.saveCar(car);
+        setFragment(new FinalFragment());
 
     }
 }

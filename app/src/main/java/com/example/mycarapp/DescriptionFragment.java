@@ -7,17 +7,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link DescriptionFragment.OnFragmentInteractionListener} interface
+ * {@link DescriptionFragment.OnDescriptionInteractionListener} interface
  * to handle interaction events.
  */
 public class DescriptionFragment extends Fragment {
 
-    private OnFragmentInteractionListener mListener;
+    EditText descriptionText;
+
+    private OnDescriptionInteractionListener mListener;
 
     public DescriptionFragment() {
         // Required empty public constructor
@@ -27,21 +31,33 @@ public class DescriptionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_description, container, false);
+
+                View v = inflater.inflate(R.layout.fragment_description, container, false);
+
+        descriptionText= v.findViewById(R.id.descriptionText);
+        Button buttonSig = v.findViewById(R.id.sigDescription);
+
+        buttonSig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.setDescription(descriptionText.getText().toString());
+            }
+        });
+                return v;
+
     }
 
 
 
-/*
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnDescriptionInteractionListener) {
+            mListener = (OnDescriptionInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnDescriptionInteractionListener");
         }
     }
 
@@ -50,7 +66,7 @@ public class DescriptionFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-*/
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -61,8 +77,8 @@ public class DescriptionFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnDescriptionInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void setDescription(String value);
     }
 }
