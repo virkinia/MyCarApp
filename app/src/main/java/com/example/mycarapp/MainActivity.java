@@ -25,8 +25,15 @@ public class MainActivity extends AppCompatActivity  implements MakerFragment.On
 
     private void setFragment(Fragment miFragment)
     {
+
+
+
+
+
         FM  = getSupportFragmentManager();
         FT = FM.beginTransaction();
+        FT.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+
         FT.replace(R.id.mainContainer, miFragment);
         FT.commit();
     }
